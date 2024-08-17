@@ -1,0 +1,20 @@
+CREATE DATABASE [pruebaTecnicaDB]
+
+USE [pruebaTecnicaDB]
+
+CREATE TABLE [dbo].[Users] (
+    [Id] INT IDENTITY(1,1) PRIMARY KEY,
+    [Username] NVARCHAR(50) NOT NULL UNIQUE,
+    [PasswordHash] NVARCHAR(255) NOT NULL
+);
+
+CREATE TABLE [dbo].[Tareas] (
+    [TaskID] INT IDENTITY(1,1) PRIMARY KEY,
+    [Title] NVARCHAR(100) NOT NULL,
+    [Description] NVARCHAR(255) NULL,
+    [CreatedDate] DATETIME NOT NULL DEFAULT GETDATE(),
+    [IsCompleted] BIT NOT NULL DEFAULT 0,
+	[Id] INT NOT NULL,
+	CONSTRAINT FK_Task_User FOREIGN KEY ([Id]) REFERENCES [dbo].[user]([Id])
+);
+
